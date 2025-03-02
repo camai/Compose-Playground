@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Compose-Playground"
 include(":app")
+include(":feature:bmi")
+include(":feature:lotto")
