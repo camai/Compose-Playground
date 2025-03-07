@@ -26,6 +26,8 @@ repositories {
 dependencies {
     implementation(libs.android.gradlePlugin)
     implementation(libs.kotlin.gradlePlugin)
+    implementation(libs.hilt.gradlePlugin)
+    implementation(libs.ksp.gradlePlugin)
 }
 
 gradlePlugin {
@@ -45,6 +47,18 @@ gradlePlugin {
         register("androidFeature") {
             id = "jg.composeplayground.android.feature"
             implementationClass = "AndroidFeatureConventionPlugin"
+        }
+        register("androidHilt") {
+            id = "jg.composeplayground.android.hilt"
+            implementationClass = "AndroidHiltConventionPlugin"
+        }
+        register("androidRoom") {
+            id = "jg.composeplayground.android.room"
+            implementationClass = "AndroidRoomConventionPlugin"
+        }
+        register("androidFirebase") {
+            id = "jg.composeplayground.android.firebase"
+            implementationClass = "AndroidFirebaseConventionPlugin"
         }
     }
 } 
