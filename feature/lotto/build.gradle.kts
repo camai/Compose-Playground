@@ -1,7 +1,6 @@
 plugins {
     id("jg.composeplayground.android.feature")
-    alias(libs.plugins.room)
-    alias(libs.plugins.ksp)
+    id("jg.composeplayground.android.room")
 }
 
 android {
@@ -11,18 +10,9 @@ android {
     // 아래 항목들은 특정 모듈만의 설정이 필요할 때만 사용
 }
 
-// Room 스키마 위치 지정
-room {
-    schemaDirectory("$projectDir/schemas")
-}
-
 dependencies {
     // 기본 의존성은 build-logic의 AndroidFeatureConventionPlugin에서 설정됨
-    
-    // Room
-    implementation(libs.room.runtime)
-    implementation(libs.room.ktx)
-    ksp(libs.room.compiler)
+    // Room 의존성은 AndroidRoomConventionPlugin에서 설정됨
     
     // Firebase - 플러그인 없이 라이브러리만 사용
     implementation(platform(libs.firebase.bom))
