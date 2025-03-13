@@ -5,13 +5,12 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.jg.composeplayground.bmi.navigation.BMI_ROUTE
+import com.jg.composeplayground.bmi.navigation.bmiScreen
 import com.jg.composeplayground.home.HomeScreen
-import com.jg.composeplayground.bmi.screen.BmiRoute
 
 object AppDestinations {
     const val HOME_ROUTE = "home"
-    const val BMI_ROUTE = "bmi"
-    // 추후 다른 경로들 추가
 }
 
 @Composable
@@ -28,15 +27,20 @@ fun AppNavHost(
         composable(AppDestinations.HOME_ROUTE) {
             HomeScreen(
                 onBmiButtonClick = {
-                    navController.navigate(AppDestinations.BMI_ROUTE)
+                    // BmiNavigation 확장 함수를 사용하여 BMI 화면으로 이동
+                    // launchSingleTop: 백스택 최상단에 이미 있으면 재사용
+                    // 백스택 관리 (Home -> BMI)
+                    navController.navigate(BMI_ROUTE) {
+                        // 중복 방지
+                        launchSingleTop = true
+                        // 백스택 보존
+                        restoreState = true
+                    }
                 }
             )
         }
-        
-        composable(AppDestinations.BMI_ROUTE) {
-            BmiRoute()
-        }
-        
-        // 추후 다른 화면들 추가
+
+        // BMI 화면 라우트 추가 - 모듈화된 네비게이션 함수 사용
+        bmiScreen()
     }
 } 

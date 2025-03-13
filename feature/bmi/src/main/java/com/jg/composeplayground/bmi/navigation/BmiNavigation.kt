@@ -1,19 +1,19 @@
 package com.jg.composeplayground.bmi.navigation
 
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.jg.composeplayground.bmi.screen.BmiRoute
 
 
-private val BMIROUTE = "bmi_route"
+const val BMI_ROUTE = "bmi_route"
 
-fun NavController.navigateToBmi(navOptions: NavOptions) =
-    navigate(route = BMIROUTE, navOptions)
+fun NavHostController.navigateToBmi(navOptions: NavOptions? = null) =
+    navigate(route = BMI_ROUTE, navOptions = navOptions)
 
 fun NavGraphBuilder.bmiScreen() {
-    composable(route = BMIROUTE) {
+    composable(route = BMI_ROUTE) {
         BmiRoute()
     }
 }

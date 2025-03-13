@@ -12,6 +12,8 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -53,103 +55,127 @@ private fun BmiScreen(
     resetBmi: () -> Unit
 ) {
 
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = "BMI 계산기",
-            style = MaterialTheme.typography.headlineMedium,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 24.dp)
-        )
-        
-        // 키 입력 필드
-        OutlinedTextField(
-            value = uiState.height,
-            onValueChange = { updateHeight(it) },
-            label = { Text("키 (cm)") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            modifier = Modifier.fillMaxWidth()
-        )
-        
-        Spacer(modifier = Modifier.height(16.dp))
-        
-        // 체중 입력 필드
-        OutlinedTextField(
-            value = uiState.weight,
-            onValueChange = { updateWeight(it) },
-            label = { Text("체중 (kg)") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            modifier = Modifier.fillMaxWidth()
-        )
-        
-        Spacer(modifier = Modifier.height(24.dp))
-        
-        // 계산 버튼
-        Button(
-            onClick = { calculateBmi() },
+    Scaffold(
+        modifier = Modifier.fillMaxSize()
+    ) { innerPadding ->
+        Surface(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(56.dp)
+                .fillMaxSize()
+                .padding(innerPadding),
+            color = MaterialTheme.colorScheme.background
         ) {
-            Text("BMI 계산하기")
-        }
-        
-        // 결과 표시
-        if (uiState.isCalculated) {
-            Spacer(modifier = Modifier.height(20.dp))
-            
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            Column(
+                modifier = modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Column(
+                Text(
+                    text = "BMI 계산기",
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(bottom = 24.dp)
+                )
+
+                // 키 입력 필드
+                OutlinedTextField(
+                    value = uiState.height,
+                    onValueChange = { updateHeight(it) },
+                    label = { Text("키 (cm)") },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // 체중 입력 필드
+                OutlinedTextField(
+                    value = uiState.weight,
+                    onValueChange = { updateWeight(it) },
+                    label = { Text("체중 (kg)") },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                // 계산 버튼
+                Button(
+                    onClick = { calculateBmi() },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                        .height(56.dp)
                 ) {
-                    Text(
-                        text = "당신의 BMI",
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    
-                    Text(
-                        text = "${uiState.bmiResult}",
-                        style = MaterialTheme.typography.headlineLarge,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(vertical = 8.dp)
-                    )
-                    
-                    Text(
-                        text = uiState.bmiCategory,
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.SemiBold
-                    )
-                    
-                    Spacer(modifier = Modifier.height(8.dp))
-                    
-                    Text(
-                        text = getBmiDescription(uiState.bmiCategory),
-                        style = MaterialTheme.typography.bodyMedium,
-                        textAlign = TextAlign.Center
+                    Text("BMI 계산하기")
+                }
+
+                // 결과 표시
+                if (uiState.isCalculated) {
+                    BmiResultCard(
+                        bmiResult = uiState.bmiResult,
+                        bmiCategory = uiState.bmiCategory,
+                        resetBmi = resetBmi
                     )
                 }
             }
-            
-            Spacer(modifier = Modifier.height(16.dp))
-            
-            Button(
-                onClick = { resetBmi() },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("다시 계산하기")
-            }
         }
+    }
+}
+
+@Composable
+private fun BmiResultCard(
+    bmiResult: Double,
+    bmiCategory: String,
+    resetBmi: () -> Unit
+) {
+    Spacer(modifier = Modifier.height(20.dp))
+
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "당신의 BMI",
+                style = MaterialTheme.typography.titleMedium
+            )
+
+            Text(
+                text = bmiResult.toString(),
+                style = MaterialTheme.typography.headlineLarge,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(vertical = 8.dp)
+            )
+
+            Text(
+                text = bmiCategory,
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.primary,
+                fontWeight = FontWeight.SemiBold
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Text(
+                text = getBmiDescription(bmiCategory),
+                style = MaterialTheme.typography.bodyMedium,
+                textAlign = TextAlign.Center
+            )
+        }
+    }
+
+    Spacer(modifier = Modifier.height(16.dp))
+
+    Button(
+        onClick = { resetBmi() },
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text("다시 계산하기")
     }
 }
 

@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlin.math.pow
 import kotlin.math.round
+import java.text.DecimalFormat
 
 data class BmiState(
     val height: String = "",
@@ -23,6 +24,9 @@ class BmiViewModel @Inject constructor() : ViewModel() {
     
     private val _uiState = MutableStateFlow(BmiState())
     val uiState: StateFlow<BmiState> = _uiState.asStateFlow()
+    
+    // 소수점 두자리까지만 표시하기 위한 포맷터
+    private val decimalFormat = DecimalFormat("#.##")
     
     fun updateHeight(height: String) {
         _uiState.update { it.copy(height = height) }
@@ -43,8 +47,8 @@ class BmiViewModel @Inject constructor() : ViewModel() {
         val heightInMeter = height / 100
         val bmi = weight / heightInMeter.pow(2)
         
-        // 소수점 둘째자리까지 반올림
-        val roundedBmi = round(bmi * 100) / 100
+        // 소수점 둘째자리까지 표시하도록 수정
+        val roundedBmi = decimalFormat.format(bmi).toDouble()
         
         val category = when {
             roundedBmi < 18.5 -> "저체중"
@@ -56,7 +60,7 @@ class BmiViewModel @Inject constructor() : ViewModel() {
         
         _uiState.update { 
             it.copy(
-                bmiResult = roundedBmi.toDouble(),
+                bmiResult = roundedBmi,
                 bmiCategory = category,
                 isCalculated = true
             )

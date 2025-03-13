@@ -13,6 +13,7 @@ kotlin {
     compilerOptions {
         jvmTarget = JvmTarget.JVM_17
     }
+    jvmToolchain(17)
 }
 
 group = "com.jg.composeplayground.buildlogic"
