@@ -1,4 +1,4 @@
-package com.jg.composeplayground.ui.theme
+package com.jg.composeplayground.theme
 
 import android.app.Activity
 import android.os.Build

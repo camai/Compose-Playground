@@ -13,6 +13,7 @@ kotlin {
     compilerOptions {
         jvmTarget = JvmTarget.JVM_17
     }
+    jvmToolchain(17)
 }
 
 group = "com.jg.composeplayground.buildlogic"
@@ -44,6 +45,10 @@ gradlePlugin {
         register("androidLibrary") {
             id = "jg.composeplayground.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
+        }
+        register("androidLibraryCompose") {
+            id = "jg.composeplayground.android.library.compose"
+            implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
         register("androidFeature") {
             id = "jg.composeplayground.android.feature"

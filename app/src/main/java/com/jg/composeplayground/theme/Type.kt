@@ -1,4 +1,4 @@
-package com.jg.composeplayground.ui.theme
+package com.jg.composeplayground.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
