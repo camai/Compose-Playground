@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun HomeScreen(
     onBmiButtonClick: () -> Unit,
+    onLottoButtonClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -51,7 +52,17 @@ fun HomeScreen(
         ) {
             Text("BMI 계산하기")
         }
-        
-        // 추후 다른 기능 버튼 추가
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+
+        Button(
+            onClick = onLottoButtonClick,
+            modifier = Modifier
+                .fillMaxWidth(0.8f)
+                .height(56.dp)
+        ) {
+            Text("로또 번호 생성기")
+        }
     }
 } 
