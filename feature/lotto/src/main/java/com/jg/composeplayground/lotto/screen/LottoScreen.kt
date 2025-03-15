@@ -2,6 +2,7 @@ package com.jg.composeplayground.lotto.screen
 
 import android.widget.NumberPicker
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -47,6 +48,7 @@ private fun LottoScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(16.dp),
+                verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 LottoNumberPicker(
@@ -60,14 +62,16 @@ private fun LottoScreen(
 
                 Row(
                     modifier = Modifier
-                        .fillMaxSize()
+                        .fillMaxWidth()
                         .padding(horizontal = 16.dp),
+                    horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Button(
                         onClick = { },
                         modifier = Modifier
                             .height(56.dp)
+                            .padding(end = 8.dp)
                     ) {
                         Text("번호 추가하기")
                     }
@@ -76,6 +80,7 @@ private fun LottoScreen(
                         onClick = { },
                         modifier = Modifier
                             .height(56.dp)
+                            .padding(start = 8.dp)
                     ) {
                         Text("초기화")
                     }
@@ -124,6 +129,7 @@ private fun LottoNumbers(
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
         numbers.forEach { number ->
