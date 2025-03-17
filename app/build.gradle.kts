@@ -59,6 +59,7 @@ android {
 dependencies {
     implementation(projects.feature.bmi)
     implementation(projects.feature.lotto)
+    implementation(projects.feature.diary)
 
     // Hilt
     implementation(libs.hilt.android)
