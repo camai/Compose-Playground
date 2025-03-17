@@ -15,8 +15,10 @@ const val BMI_ROUTE = "bmi_route"
 fun NavHostController.navigateToBmi(navOptions: NavOptions? = null) =
     navigate(route = BMI_ROUTE, navOptions = navOptions)
 
-fun NavGraphBuilder.bmiScreen() {
+fun NavGraphBuilder.bmiScreen(onNavigationBack: () -> Unit) {
     composable(route = BMI_ROUTE) {
-        BmiRoute()
+        BmiRoute(
+            onBackPress = onNavigationBack
+        )
     }
 }

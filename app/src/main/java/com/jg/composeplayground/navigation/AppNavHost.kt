@@ -49,8 +49,16 @@ fun AppNavHost(
         }
 
         // BMI 화면 라우트 추가 - 모듈화된 네비게이션 함수 사용
-        bmiScreen()
+        bmiScreen(
+            onNavigationBack = {
+                navController.popBackStack()
+            }
+        )
 
-        lottoScreen()
+        lottoScreen(
+            onNavigationBack = {
+                navController.popBackStack()
+            }
+        )
     }
 } 

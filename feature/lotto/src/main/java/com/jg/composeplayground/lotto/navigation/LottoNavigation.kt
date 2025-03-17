@@ -17,8 +17,10 @@ const val LOTTO_ROUTE = "lotto_route"
 fun NavHostController.navigateToLotto(navOptions: NavOptions? = null) =
     navigate(route = LOTTO_ROUTE, navOptions = navOptions)
 
-fun NavGraphBuilder.lottoScreen() {
+fun NavGraphBuilder.lottoScreen(onNavigationBack: () -> Unit) {
     composable(route = LOTTO_ROUTE) {
-        LottoRoute()
+        LottoRoute(
+            onBackPress = { onNavigationBack() }
+        )
     }
 }

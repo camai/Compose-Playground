@@ -18,7 +18,7 @@ import kotlin.random.Random
 private val rainbowColors = listOf(
     Color(0xFFFF0000), // 빨강
     Color(0xFFFF7F00), // 주황
-    Color(0xFFFFFF00), // 노랑
+    Color(0xFFF7e600), // 노랑
     Color(0xFF00FF00), // 초록
     Color(0xFF0000FF), // 파랑
     Color(0xFF4B0082), // 남색
