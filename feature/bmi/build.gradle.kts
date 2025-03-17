@@ -29,8 +29,6 @@ android {
 }
 
 dependencies {
-    // 기본 의존성은 build-logic의 AndroidFeatureConventionPlugin에서 설정됨
-    
     // Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)

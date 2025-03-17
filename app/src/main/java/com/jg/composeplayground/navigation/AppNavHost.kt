@@ -8,6 +8,8 @@ import androidx.navigation.compose.composable
 import com.jg.composeplayground.bmi.navigation.BMI_ROUTE
 import com.jg.composeplayground.bmi.navigation.bmiScreen
 import com.jg.composeplayground.home.HomeScreen
+import com.jg.composeplayground.lotto.navigation.LOTTO_ROUTE
+import com.jg.composeplayground.lotto.navigation.lottoScreen
 
 object AppDestinations {
     const val HOME_ROUTE = "home"
@@ -36,11 +38,27 @@ fun AppNavHost(
                         // 백스택 보존
                         restoreState = true
                     }
+                },
+                onLottoButtonClick = {
+                    navController.navigate(LOTTO_ROUTE) {
+                        launchSingleTop = true
+                        restoreState = true
+                    }
                 }
             )
         }
 
         // BMI 화면 라우트 추가 - 모듈화된 네비게이션 함수 사용
-        bmiScreen()
+        bmiScreen(
+            onNavigationBack = {
+                navController.popBackStack()
+            }
+        )
+
+        lottoScreen(
+            onNavigationBack = {
+                navController.popBackStack()
+            }
+        )
     }
 } 
