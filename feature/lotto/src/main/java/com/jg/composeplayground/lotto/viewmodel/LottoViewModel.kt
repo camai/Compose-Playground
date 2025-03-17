@@ -27,7 +27,7 @@ class LottoViewModel @Inject constructor() : ViewModel() {
     val uiState: StateFlow<LottoState> = _uiState.asStateFlow()
 
 
-    fun processIntent(intent: LottoIntent) {
+    private fun processIntent(intent: LottoIntent) {
         when (intent) {
             is LottoIntent.AddNumber -> addNumber(intent.number)
             is LottoIntent.GenerateRandom -> generateRandomNumbers()
