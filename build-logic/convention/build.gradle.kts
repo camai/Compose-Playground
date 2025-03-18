@@ -54,6 +54,14 @@ gradlePlugin {
             id = "jg.composeplayground.android.feature"
             implementationClass = "AndroidFeatureConventionPlugin"
         }
+        register("androidCore") {
+            id = "jg.composeplayground.android.core"
+            implementationClass = "AndroidCoreConventionPlugin"
+        }
+        register("androidCommon") {
+            id = "jg.composeplayground.android.common"
+            implementationClass = "AndroidCommonConventionPlugin"
+        }
         register("androidHilt") {
             id = "jg.composeplayground.android.hilt"
             implementationClass = "AndroidHiltConventionPlugin"

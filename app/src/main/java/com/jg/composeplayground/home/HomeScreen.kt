@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 fun HomeScreen(
     onBmiButtonClick: () -> Unit,
     onLottoButtonClick: () -> Unit,
+    onDiaryButtonClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -53,8 +54,7 @@ fun HomeScreen(
             Text("BMI 계산하기")
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
-
+        Spacer(modifier = Modifier.height(8.dp))
 
         Button(
             onClick = onLottoButtonClick,
@@ -63,6 +63,17 @@ fun HomeScreen(
                 .height(56.dp)
         ) {
             Text("로또 번호 생성기")
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Button(
+            onClick = onDiaryButtonClick,
+            modifier = Modifier
+                .fillMaxWidth(0.8f)
+                .height(56.dp)
+        ) {
+            Text("비밀 다이어리")
         }
     }
 } 

@@ -4,6 +4,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import com.jg.diary.screen.DiaryRoute
 
 /**
  *  추후 리펙토링 필요

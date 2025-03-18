@@ -10,6 +10,8 @@ import com.jg.composeplayground.bmi.navigation.bmiScreen
 import com.jg.composeplayground.home.HomeScreen
 import com.jg.composeplayground.lotto.navigation.LOTTO_ROUTE
 import com.jg.composeplayground.lotto.navigation.lottoScreen
+import com.jg.diary.navigation.DIARY_ROUTE
+import com.jg.diary.navigation.diaryScreen
 
 object AppDestinations {
     const val HOME_ROUTE = "home"
@@ -44,6 +46,12 @@ fun AppNavHost(
                         launchSingleTop = true
                         restoreState = true
                     }
+                },
+                onDiaryButtonClick = {
+                    navController.navigate(DIARY_ROUTE) {
+                        launchSingleTop = true
+                        restoreState = true
+                    }
                 }
             )
         }
@@ -56,6 +64,12 @@ fun AppNavHost(
         )
 
         lottoScreen(
+            onNavigationBack = {
+                navController.popBackStack()
+            }
+        )
+
+        diaryScreen(
             onNavigationBack = {
                 navController.popBackStack()
             }

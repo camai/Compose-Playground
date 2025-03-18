@@ -96,6 +96,8 @@ room = { id = "androidx.room", version.ref = "room" }
 
 # 프로젝트 내부 Convention 플러그인
 android-feature = { id = "jg.composeplayground.android.feature" }
+android-common = { id = "jg.composeplayground.android.common" }
+android-core = { id = "jg.composeplayground.android.core" }
 android-application-compose = { id = "jg.composeplayground.android.application.compose" }
 android-application = { id = "jg.composeplayground.android.application" }
 android-library = { id = "jg.composeplayground.android.library" }
