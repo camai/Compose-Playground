@@ -15,24 +15,20 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.jg.diary.viewmodel.DiaryViewModel
+import com.jg.diary.viewmodel.SecretKeypadViewModel
 
 @Composable
-fun DiaryRoute(
-    viewModel: DiaryViewModel = hiltViewModel(),
-    onBackPress: () -> Unit
+fun SecretKeypadRoute(
+    viewModel: SecretKeypadViewModel = hiltViewModel()
 ) {
-    DiaryScreen(
-        onBackPress = onBackPress,
-    )
+
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DiaryScreen(
-    onBackPress: () -> Unit,
+fun SecretKeypadScreen(
+    onBackPress: () -> Unit
 ) {
-
     Scaffold(
         modifier = Modifier
             .fillMaxSize(),

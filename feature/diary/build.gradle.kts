@@ -28,6 +28,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.common.ui)
+
     // Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
