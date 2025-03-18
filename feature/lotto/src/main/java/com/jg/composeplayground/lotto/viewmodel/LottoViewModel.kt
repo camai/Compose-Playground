@@ -13,9 +13,14 @@ import kotlin.random.Random
 class LottoViewModel @Inject constructor() : ViewModel() {
 
     data class LottoState(
-        val numbers: List<Int> = emptyList(),
-        val isComplete: Boolean = false
-    )
+        val numbers: Set<Int> = emptySet(),
+        val isComplete: Boolean = false,
+        val manualNumbers: Set<Int> = emptySet() // 수동으로 입력한 번호 추적
+    ) {
+        // 정렬된 번호 목록을 제공하는 계산 속성
+        val sortedNumbers: List<Int>
+            get() = numbers.toList().sorted()
+    }
 
     sealed class LottoIntent {
         data class AddNumber(val number: Int) : LottoIntent()
@@ -51,49 +56,37 @@ class LottoViewModel @Inject constructor() : ViewModel() {
     // 로직 구현 - private 함수로 분리
     private fun addNumber(number: Int) {
         val currentNumbers = _uiState.value.numbers
+        val currentManualNumbers = _uiState.value.manualNumbers
 
         if (currentNumbers.size >= 6 || number in currentNumbers) return
 
-        val newNumbers = (currentNumbers + number).sorted()
+        val newNumbers = currentNumbers + number
+        // 수동 입력 번호도 추적
+        val newManualNumbers = currentManualNumbers + number
+        
         _uiState.value = _uiState.value.copy(
             numbers = newNumbers,
+            manualNumbers = newManualNumbers,
             isComplete = newNumbers.size == 6
         )
     }
 
     private fun generateRandomNumbers() {
-        val currentNumbers = _uiState.value.numbers
+        val currentManualNumbers = _uiState.value.manualNumbers
 
-        if (currentNumbers.isEmpty()) {
-            generateAllRandomNumbers()
-            return
-        }
+        // 이미 6개 모두 수동으로 입력했으면 변경하지 않음
+        if (currentManualNumbers.size >= 6) return
 
-        val remainingCount = 6 - currentNumbers.size
-        if (remainingCount <= 0) return
+        // 효율적인 방식으로 변경: 가능한 번호 풀을 만들고 셔플
+        val availableNumbers = (1..45).filter { it !in currentManualNumbers }
+        val additionalNumbers = availableNumbers.shuffled()
+            .take(6 - currentManualNumbers.size)
+            .toSet()
 
-        val additionalNumbers = generateSequence {
-            Random.nextInt(from = 1, until = 46)
-        }.distinct()
-            .filter { it !in currentNumbers }
-            .take(remainingCount)
-            .toList()
-
-        val newNumbers = (currentNumbers + additionalNumbers).sorted()
+        val newNumbers = currentManualNumbers + additionalNumbers
 
         _uiState.value = _uiState.value.copy(
             numbers = newNumbers,
-            isComplete = true
-        )
-    }
-
-    private fun generateAllRandomNumbers() {
-        val numbers = generateSequence {
-            Random.nextInt(from = 1, until = 46)
-        }.distinct().take(6).sorted().toList()
-
-        _uiState.value = _uiState.value.copy(
-            numbers = numbers,
             isComplete = true
         )
     }

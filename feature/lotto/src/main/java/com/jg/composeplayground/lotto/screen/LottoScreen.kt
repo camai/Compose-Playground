@@ -73,7 +73,7 @@ private fun LottoScreen(
             .fillMaxSize(),
         topBar = {
             CenterAlignedTopAppBar(
-                title = {  },
+                title = { Text("로또 번호 생성기") },
                 navigationIcon = {
                     IconButton(onClick = onBackPress) {
                         Icon(
@@ -128,7 +128,7 @@ private fun LottoScreen(
 
                 AnimatedVisibility(visible = lottoState.numbers.isNotEmpty()) {
                     LottoNumbers(
-                        numbers = lottoState.numbers
+                        numbers = lottoState.sortedNumbers
                     )
                 }
 
@@ -140,7 +140,8 @@ private fun LottoScreen(
                     },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(56.dp)
+                        .height(56.dp),
+                    enabled = !lottoState.isComplete || lottoState.manualNumbers.size < 6
                 ) {
                     Text("자동 생성 시작")
                 }
