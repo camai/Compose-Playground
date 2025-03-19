@@ -11,7 +11,9 @@ import com.jg.composeplayground.home.HomeScreen
 import com.jg.composeplayground.lotto.navigation.LOTTO_ROUTE
 import com.jg.composeplayground.lotto.navigation.lottoScreen
 import com.jg.diary.navigation.DIARY_ROUTE
+import com.jg.diary.navigation.PASSWORD_ROUTE
 import com.jg.diary.navigation.diaryScreen
+import com.jg.diary.navigation.passwordScreen
 
 object AppDestinations {
     const val HOME_ROUTE = "home"
@@ -48,7 +50,7 @@ fun AppNavHost(
                     }
                 },
                 onDiaryButtonClick = {
-                    navController.navigate(DIARY_ROUTE) {
+                    navController.navigate(PASSWORD_ROUTE) {
                         launchSingleTop = true
                         restoreState = true
                     }
@@ -69,10 +71,19 @@ fun AppNavHost(
             }
         )
 
-        diaryScreen(
+        passwordScreen(
             onNavigationBack = {
                 navController.popBackStack()
+            },
+            navToDiary = {
+                navController.navigate(DIARY_ROUTE) {
+                    launchSingleTop = true
+                }
             }
         )
+
+        diaryScreen {
+            navController.popBackStack()
+        }
     }
 } 

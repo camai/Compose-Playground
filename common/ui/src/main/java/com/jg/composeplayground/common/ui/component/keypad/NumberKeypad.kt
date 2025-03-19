@@ -19,6 +19,7 @@ import com.jg.composeplayground.common.R
 
 @Composable
 fun NumberKeypad(
+    modifier: Modifier = Modifier,
     onNumberClick: (Char) -> Unit,
     onClearClick: () -> Unit,
     onDoneClick: () -> Unit
@@ -71,7 +72,7 @@ fun NumberKeypad(
                             rippleColor = Color(0xFFF7F8FB),
                             onPressed = {
                                 onNumberClick(value)
-                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                             },
                             textStyle = TextStyle.Default,
                             value = value
