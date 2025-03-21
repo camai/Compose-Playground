@@ -48,7 +48,6 @@ fun SecretKeypadRoute(
     LaunchedEffect(uiState.isDone) {
         if (uiState.isDone) {
             onSuccess()
-            viewModel.clear
         }
     }
 

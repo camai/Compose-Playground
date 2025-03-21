@@ -95,6 +95,19 @@ class SecretKeypadViewModel @Inject constructor(
             )
         }
     }
+
+    // 보완 필요
+    override fun onCleared() {
+        _uiState.update {
+            it.copy(
+                isDone = false,
+                passwordState = PasswordState.INIT,
+                password = "",
+                inputLength = 0
+            )
+        }
+        super.onCleared()
+    }
 }
 
 data class SecretKeypadState(
