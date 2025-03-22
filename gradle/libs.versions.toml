@@ -5,6 +5,7 @@ appcompat = "1.7.0"
 composeBom = "2025.03.00"
 compose-compiler = "2.0.21"
 coreKtx = "1.15.0"
+datastore = "1.1.1"
 espressoCore = "3.6.1"
 firebase-bom = "33.10.0"
 firebase-crashlytics-plugin = "3.0.3"
@@ -17,14 +18,18 @@ jetbrainsKotlinJvm = "2.0.21"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 kotlin = "2.0.21"
+kotlinx-coroutines-test = "1.7.3"
 kotlinx-serialization = "1.6.3"
 ksp = "2.0.21-1.0.26"
 lifecycleRuntimeKtx = "2.8.7"
 material = "1.12.0"
+mockito-kotlin = "5.2.1"
 navigation-compose = "2.8.9"
 room = "2.6.1"
 
 [libraries]
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+androidx-datastore-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "datastore" }
 ndroid-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
@@ -78,6 +83,10 @@ firebase-performance = { group = "com.google.firebase", name = "firebase-perf" }
 
 # Gradle plugins
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+
+# 테스트 라이브러리
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
+mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockito-kotlin" }
 
 [plugins]
 android-application-official = { id = "com.android.application", version.ref = "agp" }

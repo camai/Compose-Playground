@@ -4,8 +4,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.jg.diary.screen.DiaryRoute
 import com.jg.diary.screen.SecretKeypadRoute
+import com.jg.diary.viewmodel.SecretKeypadViewModel
 
 /**
  *  추후 리펙토링 필요
@@ -35,7 +37,9 @@ fun NavGraphBuilder.passwordScreen(
     composable(route = PASSWORD_ROUTE) {
         SecretKeypadRoute(
             onBackPress = onNavigationBack,
-            onSuccess = navToDiary
+            onSuccess = {
+                navToDiary()
+            }
         )
     }
 }

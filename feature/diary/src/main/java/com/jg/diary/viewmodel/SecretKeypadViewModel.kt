@@ -1,10 +1,14 @@
 package com.jg.diary.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.jg.composeplayground.core.domain.usecase.GetPassCodeUseCase
+import com.jg.composeplayground.core.domain.usecase.SetPassCodeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -16,7 +20,8 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class SecretKeypadViewModel @Inject constructor(
-
+    private val getPassCodeUseCase: GetPassCodeUseCase,
+    private val setPassCodeUseCase: SetPassCodeUseCase
 ): ViewModel() {
 
     companion object {
@@ -27,6 +32,7 @@ class SecretKeypadViewModel @Inject constructor(
         data class AddNumber(val value: Char) : SecretKeypadIntent()
         object Clear : SecretKeypadIntent()
         object Done : SecretKeypadIntent()
+        object Reset : SecretKeypadIntent()
     }
 
     private val _uiState = MutableStateFlow(SecretKeypadState())
@@ -37,6 +43,7 @@ class SecretKeypadViewModel @Inject constructor(
             is SecretKeypadIntent.AddNumber -> addNumber(intent.value)
             is SecretKeypadIntent.Clear -> clear()
             is SecretKeypadIntent.Done -> done()
+            is SecretKeypadIntent.Reset -> resetState()
         }
     }
 
@@ -52,11 +59,16 @@ class SecretKeypadViewModel @Inject constructor(
         processIntent(SecretKeypadIntent.Done)
     }
 
+    val resetState: () -> Unit = {
+        processIntent(SecretKeypadIntent.Reset)
+    }
+
     private fun addNumber(number: Char) {
         val currentLength = _uiState.value.password.length
         if (currentLength >= MAX_INPUT_LENGTH) return
 
         val update = _uiState.value.password + number
+        // 상태 업데이트
         _uiState.update {
             it.copy(
                 password = update,
@@ -87,26 +99,46 @@ class SecretKeypadViewModel @Inject constructor(
     }
 
     private fun done() {
-        // 저장 로직 구현
-        _uiState.update {
-            it.copy(
-                isDone = true,
-                passwordState = PasswordState.INPUT
-            )
+        val currentPassword = _uiState.value.password
+
+        viewModelScope.launch {
+            if (currentPassword.length == MAX_INPUT_LENGTH) {
+                getPassCodeUseCase().collect {
+                    if (it.isEmpty()) {
+                        setPassCodeUseCase(currentPassword)
+                        _uiState.update { current ->
+                            current.copy(
+                                isDone = true,
+                                passwordState = PasswordState.INPUT
+                            )
+                        }
+                    } else {
+                        if (it == currentPassword) {
+                            // 저장 로직 구현
+                            _uiState.update { current ->
+                                current.copy(
+                                    isDone = true,
+                                    passwordState = PasswordState.INPUT
+                                )
+                            }
+                        } else {
+                            _uiState.update { current ->
+                                current.copy(
+                                    passwordState = PasswordState.Warning
+                                )
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
-    // 보완 필요
-    override fun onCleared() {
+    private fun resetState() {
+        // 초기화 로직 구현
         _uiState.update {
-            it.copy(
-                isDone = false,
-                passwordState = PasswordState.INIT,
-                password = "",
-                inputLength = 0
-            )
+            SecretKeypadState()
         }
-        super.onCleared()
     }
 }
 
