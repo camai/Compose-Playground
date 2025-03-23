@@ -20,6 +20,7 @@ junitVersion = "1.2.1"
 kotlin = "2.0.21"
 kotlinx-coroutines-test = "1.7.3"
 kotlinx-serialization = "1.6.3"
+kotlinx-coroutines = "1.9.0"
 ksp = "2.0.21-1.0.26"
 lifecycleRuntimeKtx = "2.8.7"
 material = "1.12.0"
@@ -59,6 +60,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-serialization-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-serialization", version.ref = "kotlin" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 
 # Hilt

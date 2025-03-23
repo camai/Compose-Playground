@@ -57,10 +57,17 @@ android {
 }
 
 dependencies {
-    api(projects.feature.bmi)
-    api(projects.feature.lotto)
-    api(projects.feature.diary)
+    implementation(projects.feature.bmi)
+    implementation(projects.feature.lotto)
     implementation(projects.feature.diary)
+    implementation(projects.feature.diary)
+
+    implementation(projects.core.data)
+    implementation(projects.core.domain)
+    implementation(projects.core.model)
+    implementation(projects.core.datastore)
+
+    implementation(projects.common.ui)
 
     // Hilt
     implementation(libs.hilt.android)

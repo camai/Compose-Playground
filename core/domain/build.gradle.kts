@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.android.core)
+    alias(libs.plugins.android.library)
 }
 
 android {
@@ -24,7 +24,7 @@ android {
 
 dependencies {
     // 모델 모듈 의존성 추가
-    implementation(projects.core.model)
+    api(projects.core.model)
 
     implementation(libs.kotlinx.serialization.json)
 

@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.android.core)
+    alias(libs.plugins.android.library)
 }
 
 android {
@@ -30,12 +30,8 @@ android {
 }
 
 dependencies {
-    // 도메인 모듈만 의존
-    implementation(projects.core.domain)
-    // 모델 모듈 의존성 추가
-    implementation(projects.core.model)
-    // 순환 참조 방지를 위해 datastore 의존성 제거
-    // implementation(projects.core.datastore)
+    api(projects.core.domain)
+    api(projects.core.model)
 
     implementation(libs.kotlinx.serialization.json)
 

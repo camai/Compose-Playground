@@ -1,18 +1,22 @@
-package com.jg.composeplayground.core.datastore
+package com.jg.composeplayground.core.datastore.setting
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.jg.composeplayground.core.data.datastore.AppSettingDataStoreSource
-import com.jg.composeplayground.core.domain.model.AppSetting
 import com.jg.composeplayground.core.datastore.di.AppSettingDataStore
 import com.jg.composeplayground.core.datastore.utils.asDataStoreFlow
+import com.jg.composeplayground.core.model.data.AppSettingData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class AppSettingDataStoreSourceImpl @Inject constructor(
+/**
+ * AppSettings DataStore 구현체
+ * data 모듈의 AppSettingDataStoreSource 인터페이스 구현
+ */
+class AppSettingsDataSourceImpl @Inject constructor(
     @AppSettingDataStore private val dataStore: DataStore<Preferences>
 ) : AppSettingDataStoreSource {
 
@@ -20,12 +24,12 @@ class AppSettingDataStoreSourceImpl @Inject constructor(
         val PASS_CODE = stringPreferencesKey("pass_code")
     }
 
-    override fun getAppSetting(): Flow<AppSetting> = dataStore.data
+    override val settings: Flow<AppSettingData> = dataStore.data
         .map { preferences ->
-            AppSetting(
+            AppSettingData(
                 passCode = preferences[PreferencesKeys.PASS_CODE] ?: ""
             )
-        }.asDataStoreFlow("app-settings", defaultValue = AppSetting())
+        }.asDataStoreFlow("app-settings", AppSettingData())
 
     override suspend fun setPassCode(passCode: String) {
         dataStore.edit { preferences ->

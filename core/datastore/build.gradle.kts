@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.android.core)
+    alias(libs.plugins.android.library)
 }
 
 android {
@@ -23,12 +23,13 @@ android {
 }
 
 dependencies {
-    // data 모듈에 의존 (AppSettingDataStoreSource 인터페이스가 위치)
+    // data 모듈에 의존해서 인터페이스 구현
     implementation(projects.core.data)
 
     implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.androidx.core.ktx)
+    implementation(libs.kotlinx.coroutines.android)
     
     // DataStore
     implementation(libs.androidx.datastore.preferences)

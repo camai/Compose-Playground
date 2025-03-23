@@ -15,11 +15,11 @@ abstract class UseCaseModules {
 
     @Binds
     abstract fun bindGetPassCodeUseCase(
-        getPassCodeUseCaseImpl: GetPassCodeUseCaseImpl
+        getPassCodeUseCase: GetPassCodeUseCaseImpl
     ): GetPassCodeUseCase
 
     @Binds
     abstract fun bindSetPassCodeUseCase(
-        setPassCodeUseCaseImpl: SetPassCodeUseCaseImpl
+        setPassCodeUseCase: SetPassCodeUseCaseImpl
     ): SetPassCodeUseCase
 }
