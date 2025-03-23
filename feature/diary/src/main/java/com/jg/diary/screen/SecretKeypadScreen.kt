@@ -5,8 +5,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -55,6 +57,7 @@ fun SecretKeypadRoute(
     SecretKeypadScreen(
         length = uiState.inputLength,
         passwordState = uiState.passwordState,
+        errorMessage = uiState.errorMessage,
         onNumberClick = viewModel.addNumber,
         onClearClick = viewModel.clear,
         onDoneClick = viewModel.done,
@@ -67,6 +70,7 @@ fun SecretKeypadRoute(
 fun SecretKeypadScreen(
     length: Int,
     passwordState: PasswordState,
+    errorMessage: String?,
     onNumberClick: (Char) -> Unit,
     onClearClick: () -> Unit,
     onDoneClick: () -> Unit,
@@ -104,7 +108,7 @@ fun SecretKeypadScreen(
                     .fillMaxSize()
                     .padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text(
                     text = "비밀번호 입력 해주세요",
@@ -118,6 +122,16 @@ fun SecretKeypadScreen(
                         inputLength = length,
                         passwordState = passwordState
                     )
+                }
+                
+                if (errorMessage != null) {
+                    Text(
+                        text = errorMessage,
+                        color = Color.Red,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                } else {
+                    Spacer(modifier = Modifier.height(20.dp))
                 }
             }
 

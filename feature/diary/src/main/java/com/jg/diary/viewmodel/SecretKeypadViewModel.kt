@@ -73,7 +73,8 @@ class SecretKeypadViewModel @Inject constructor(
             it.copy(
                 password = update,
                 inputLength = update.length,
-                passwordState = PasswordState.INPUT
+                passwordState = PasswordState.INPUT,
+                errorMessage = null
             )
         }
     }
@@ -92,7 +93,8 @@ class SecretKeypadViewModel @Inject constructor(
                     passwordState = if (updatedPassword.isNotEmpty())
                         PasswordState.INPUT
                     else
-                        PasswordState.INIT
+                        PasswordState.INIT,
+                    errorMessage = null
                 )
             }
         }
@@ -102,35 +104,78 @@ class SecretKeypadViewModel @Inject constructor(
         val currentPassword = _uiState.value.password
 
         viewModelScope.launch {
-            if (currentPassword.length == MAX_INPUT_LENGTH) {
-                getPassCodeUseCase().collect {
-                    if (it.isEmpty()) {
-                        setPassCodeUseCase(currentPassword)
-                        _uiState.update { current ->
-                            current.copy(
-                                isDone = true,
-                                passwordState = PasswordState.INPUT
-                            )
-                        }
-                    } else {
-                        if (it == currentPassword) {
-                            // 저장 로직 구현
-                            _uiState.update { current ->
-                                current.copy(
-                                    isDone = true,
-                                    passwordState = PasswordState.INPUT
-                                )
-                            }
-                        } else {
-                            _uiState.update { current ->
-                                current.copy(
-                                    passwordState = PasswordState.Warning
-                                )
-                            }
-                        }
-                    }
+            // 입력 길이 검증
+            if (!validateInputLength(currentPassword)) return@launch
+            
+            // 패스코드 검증 및 처리
+            getPassCodeUseCase().collect { savedPassCode ->
+                when {
+                    // 처음 설정하는 경우
+                    savedPassCode.isEmpty() -> handleNewPasscodeSetup(currentPassword)
+                    
+                    // 기존 패스코드와 비교
+                    savedPassCode == currentPassword -> handleSuccessfulLogin()
+                    
+                    // 패스코드 불일치
+                    else -> handleInvalidPasscode()
                 }
             }
+        }
+    }
+
+    /**
+     * 비밀번호 입력 길이 검증
+     * @return 유효한 길이인지 여부
+     */
+    private fun validateInputLength(password: String): Boolean {
+        if (password.length < MAX_INPUT_LENGTH) {
+            _uiState.update { current ->
+                current.copy(
+                    passwordState = PasswordState.Warning,
+                    errorMessage = "모두 입력해주세요"
+                )
+            }
+            return false
+        }
+        return true
+    }
+
+    /**
+     * 새 비밀번호 설정 처리
+     */
+    private suspend fun handleNewPasscodeSetup(password: String) {
+        setPassCodeUseCase(password)
+        _uiState.update { current ->
+            current.copy(
+                isDone = true,
+                passwordState = PasswordState.INPUT,
+                errorMessage = null
+            )
+        }
+    }
+
+    /**
+     * 로그인 성공 처리
+     */
+    private fun handleSuccessfulLogin() {
+        _uiState.update { current ->
+            current.copy(
+                isDone = true,
+                passwordState = PasswordState.INPUT,
+                errorMessage = null
+            )
+        }
+    }
+
+    /**
+     * 패스코드 불일치 처리
+     */
+    private fun handleInvalidPasscode() {
+        _uiState.update { current ->
+            current.copy(
+                passwordState = PasswordState.Warning,
+                errorMessage = "입력된 번호가 틀렸습니다"
+            )
         }
     }
 
@@ -146,7 +191,8 @@ data class SecretKeypadState(
     val inputLength: Int = 0,
     val password: String = "",
     val passwordState: PasswordState = PasswordState.INIT,
-    val isDone: Boolean = false
+    val isDone: Boolean = false,
+    val errorMessage: String? = null
 )
 
 sealed class PasswordState {
