@@ -3,10 +3,11 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.android.library)
+    alias(libs.plugins.android.room)
 }
 
 android {
-    namespace = "com.jg.composeplayground.core.domain"
+    namespace = "com.jg.composeplayground.database"
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.10"
     }
@@ -23,12 +24,18 @@ android {
 }
 
 dependencies {
-    // 모델 모듈 의존성 추가
-    implementation(projects.core.model)
+
+    // data 모듈에 의존해서 인터페이스 구현
+    implementation(projects.core.data)
 
     implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.androidx.core.ktx)
+    implementation(libs.kotlinx.coroutines.android)
+
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
 
     // Hilt
     implementation(libs.hilt.android)
