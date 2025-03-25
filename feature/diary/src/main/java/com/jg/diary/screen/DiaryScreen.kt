@@ -1,53 +1,53 @@
 package com.jg.diary.screen
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.jg.diary.R
+import com.jg.composeplayground.core.model.enums.DiaryWritingType
+import com.jg.composeplayground.core.model.navigation.DiaryWritingArgs
 import com.jg.diary.viewmodel.DiaryViewModel
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Divider
-import androidx.compose.material3.Text
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.Box
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 
 @Composable
 fun DiaryRoute(
     viewModel: DiaryViewModel = hiltViewModel(),
-    onBackPress: () -> Unit
+    onBackPress: () -> Unit,
+    onNavigateToWriting: (DiaryWritingArgs) -> Unit
 ) {
     DiaryScreen(
         onBackPress = onBackPress,
+        onNavigateToWriting = onNavigateToWriting
     )
 }
 
@@ -55,10 +55,11 @@ fun DiaryRoute(
 @Composable
 fun DiaryScreen(
     onBackPress: () -> Unit,
+    onNavigateToWriting: (DiaryWritingArgs) -> Unit
 ) {
     // 스크롤 동작을 위한 설정
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
-    
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -97,8 +98,8 @@ fun DiaryScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                // 여기서 verticalScroll을 적용하면 LazyColumn과 충돌
-                // 대신 LazyColumn을 전체 화면을 채우도록 함
+            // 여기서 verticalScroll을 적용하면 LazyColumn과 충돌
+            // 대신 LazyColumn을 전체 화면을 채우도록 함
         ) {
             // 기존 "글쓰기" 버튼을 LazyColumn 헤더에 포함
             LazyColumn(
@@ -114,7 +115,16 @@ fun DiaryScreen(
                     ) {
                         IconButton(
                             modifier = Modifier.align(Alignment.CenterEnd),
-                            onClick = { /*TODO*/ }
+                            onClick = {
+                                onNavigateToWriting(
+                                    DiaryWritingArgs(
+                                        diaryId = null,
+                                        diaryWritingType = DiaryWritingType.WRITING,
+                                        content = "",
+                                        date = ""
+                                    )
+                                )
+                            }
                         ) {
                             Icon(
                                 imageVector = Icons.Filled.Edit,
@@ -123,14 +133,21 @@ fun DiaryScreen(
                         }
                     }
                 }
-                
+
                 // 일기 아이템들
                 items(10) { index ->
                     DiaryItem(
                         date = "2023년 10월 ${index + 1}일",
                         content = "오늘의 일기 내용입니다. 이것은 첫 번째 줄이고, 추가 내용은 생략됩니다.",
                         onClick = {
-                            // 클릭 시 상세 화면으로 이동하는 로직 구현
+                            onNavigateToWriting(
+                                DiaryWritingArgs(
+                                    diaryId = index,
+                                    diaryWritingType = DiaryWritingType.EDIT_POST,
+                                    content = "오늘의 일기 내용입니다. 이것은 첫 번째 줄이고, 추가 내용은 생략됩니다.",
+                                    date = "2023-10-${index + 1} 12:00:00"
+                                )
+                            )
                         }
                     )
                 }
@@ -173,7 +190,7 @@ private fun DiaryItem(
                     contentDescription = "날짜",
                     tint = MaterialTheme.colorScheme.primary
                 )
-                
+
                 // 날짜 텍스트
                 Text(
                     text = date,
@@ -181,7 +198,7 @@ private fun DiaryItem(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
-            
+
             // 구분선
             Box(
                 modifier = Modifier
@@ -193,7 +210,7 @@ private fun DiaryItem(
                         shape = RoundedCornerShape(1.dp)
                     )
             )
-            
+
             // 내용 미리보기 (첫 줄만)
             Text(
                 text = content.split("\n").first(),
