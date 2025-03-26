@@ -10,6 +10,13 @@ import com.jg.composeplayground.bmi.navigation.bmiScreen
 import com.jg.composeplayground.home.HomeScreen
 import com.jg.composeplayground.lotto.navigation.LOTTO_ROUTE
 import com.jg.composeplayground.lotto.navigation.lottoScreen
+import com.jg.composeplayground.diary.navigation.DIARY_ROUTE
+import com.jg.composeplayground.diary.navigation.PASSWORD_ROUTE
+import com.jg.composeplayground.diary.navigation.WRITING_ROUTE
+import com.jg.composeplayground.diary.navigation.diaryScreen
+import com.jg.composeplayground.diary.navigation.navigateToWriting
+import com.jg.composeplayground.diary.navigation.passwordScreen
+import com.jg.composeplayground.diary.navigation.writeScreen
 
 object AppDestinations {
     const val HOME_ROUTE = "home"
@@ -44,6 +51,12 @@ fun AppNavHost(
                         launchSingleTop = true
                         restoreState = true
                     }
+                },
+                onDiaryButtonClick = {
+                    navController.navigate(PASSWORD_ROUTE) {
+                        launchSingleTop = true
+                        restoreState = true
+                    }
                 }
             )
         }
@@ -56,6 +69,33 @@ fun AppNavHost(
         )
 
         lottoScreen(
+            onNavigationBack = {
+                navController.popBackStack()
+            }
+        )
+
+        passwordScreen(
+            onNavigationBack = {
+                navController.popBackStack()
+            },
+            navToDiary = {
+                navController.navigate(DIARY_ROUTE) {
+                    launchSingleTop = true
+                }
+            }
+        )
+
+        diaryScreen(
+            onNavigateToWriting = { args ->
+                println("!! diaryScreen args=$args")
+                navController.navigateToWriting(args)
+            },
+            onNavigationBack = {
+                navController.popBackStack()
+            }
+        )
+
+        writeScreen(
             onNavigationBack = {
                 navController.popBackStack()
             }

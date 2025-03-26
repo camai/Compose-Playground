@@ -5,6 +5,7 @@ appcompat = "1.7.0"
 composeBom = "2025.03.00"
 compose-compiler = "2.0.21"
 coreKtx = "1.15.0"
+datastore = "1.1.1"
 espressoCore = "3.6.1"
 firebase-bom = "33.10.0"
 firebase-crashlytics-plugin = "3.0.3"
@@ -17,14 +18,19 @@ jetbrainsKotlinJvm = "2.0.21"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 kotlin = "2.0.21"
+kotlinx-coroutines-test = "1.7.3"
 kotlinx-serialization = "1.6.3"
+kotlinx-coroutines = "1.9.0"
 ksp = "2.0.21-1.0.26"
 lifecycleRuntimeKtx = "2.8.7"
 material = "1.12.0"
+mockito-kotlin = "5.2.1"
 navigation-compose = "2.8.9"
 room = "2.6.1"
 
 [libraries]
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+androidx-datastore-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "datastore" }
 ndroid-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
@@ -54,6 +60,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-serialization-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-serialization", version.ref = "kotlin" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 
 # Hilt
@@ -79,6 +86,10 @@ firebase-performance = { group = "com.google.firebase", name = "firebase-perf" }
 # Gradle plugins
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 
+# 테스트 라이브러리
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
+mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockito-kotlin" }
+
 [plugins]
 android-application-official = { id = "com.android.application", version.ref = "agp" }
 android-library-official = { id = "com.android.library", version.ref = "agp" }
@@ -96,6 +107,8 @@ room = { id = "androidx.room", version.ref = "room" }
 
 # 프로젝트 내부 Convention 플러그인
 android-feature = { id = "jg.composeplayground.android.feature" }
+android-common = { id = "jg.composeplayground.android.common" }
+android-core = { id = "jg.composeplayground.android.core" }
 android-application-compose = { id = "jg.composeplayground.android.application.compose" }
 android-application = { id = "jg.composeplayground.android.application" }
 android-library = { id = "jg.composeplayground.android.library" }
