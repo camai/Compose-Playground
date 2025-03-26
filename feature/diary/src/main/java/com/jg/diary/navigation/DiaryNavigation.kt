@@ -2,12 +2,13 @@ package com.jg.diary.navigation
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
-import androidx.navigation.NavType
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
+import com.jg.composeplayground.common.common.navigation.*
+import com.jg.composeplayground.core.model.enums.DiaryWritingType
 import com.jg.composeplayground.core.model.navigation.DiaryWritingArgs
 import com.jg.diary.screen.DiaryRoute
 import com.jg.diary.screen.SecretKeypadRoute
@@ -21,11 +22,19 @@ const val DIARY_ROUTE = "diary_route"
 const val PASSWORD_ROUTE = "password_route"
 const val WRITING_ROUTE = "writing_route"
 
+// JSON 파라미터 이름
+private const val PARAM_JSON = "json"
+
+
 fun NavHostController.navigateToDiary(navOptions: NavOptions? = null) =
     navigate(route = DIARY_ROUTE, navOptions = navOptions)
 
 fun NavHostController.navigateToPassword(navOptions: NavOptions? = null) =
     navigate(route = PASSWORD_ROUTE, navOptions = navOptions)
+
+fun NavHostController.navigateToWriting(args: DiaryWritingArgs, navOptions: NavOptions? = null) {
+    navigate(route = args.toJsonRoute(WRITING_ROUTE, PARAM_JSON), navOptions = navOptions)
+}
 
 fun NavGraphBuilder.diaryScreen(
     onNavigateToWriting: (DiaryWritingArgs) -> Unit,
@@ -43,17 +52,15 @@ fun NavGraphBuilder.diaryScreen(
 fun NavGraphBuilder.writeScreen(
     onNavigationBack: () -> Unit
 ) {
+    val routePlaceholder = createJsonRoutePlaceholder(WRITING_ROUTE, PARAM_JSON)
+    
     composable(
-        route = WRITING_ROUTE,
-        arguments = listOf(
-            navArgument("args") {
-                type = NavType.ParcelableType(DiaryWritingArgs::class.java)
-                nullable = false
-                defaultValue = DiaryWritingArgs()
-            }
-        )
-    ) {
+        route = routePlaceholder,
+        arguments = listOf(createJsonNavArgument(PARAM_JSON))
+    ) { backStackEntry ->
+        val args = backStackEntry.getJsonArg<DiaryWritingArgs>(PARAM_JSON) ?: DiaryWritingArgs()
         WritingRoute(
+            argument = args,
             onNavigateBack = onNavigationBack
         )
     }

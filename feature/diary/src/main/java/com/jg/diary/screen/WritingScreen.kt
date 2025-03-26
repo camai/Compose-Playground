@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jg.composeplayground.core.model.enums.DiaryWritingType
+import com.jg.composeplayground.core.model.navigation.DiaryWritingArgs
 import com.jg.diary.viewmodel.WritingViewModel
 
 
@@ -20,8 +21,10 @@ import com.jg.diary.viewmodel.WritingViewModel
 @Composable
 fun WritingRoute(
     onNavigateBack: () -> Unit,
+    argument: DiaryWritingArgs,
     viewModel: WritingViewModel = hiltViewModel()
 ) {
+    println("!! argument=$argument")
     val uiState by viewModel.uiState.collectAsState()
 
     WritingScreen(

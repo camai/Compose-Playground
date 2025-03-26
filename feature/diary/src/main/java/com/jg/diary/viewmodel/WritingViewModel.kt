@@ -19,24 +19,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class WritingViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle
+
 ) : ViewModel() {
 
-    private val args: DiaryWritingArgs = checkNotNull(savedStateHandle["args"])
 
     private val _uiState = MutableStateFlow(WritingUiState())
     val uiState: StateFlow<WritingUiState> = _uiState.asStateFlow()
-
-    init {
-        _uiState.update { current ->
-            current.copy(
-                content = args.content,
-                date = args.date,
-                diaryWritingType = args.diaryWritingType,
-                diaryId = args.diaryId
-            )
-        }
-    }
 
     fun onContentChange(content: String) {
         _uiState.update { current ->

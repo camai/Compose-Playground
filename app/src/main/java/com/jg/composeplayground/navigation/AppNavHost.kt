@@ -14,6 +14,7 @@ import com.jg.diary.navigation.DIARY_ROUTE
 import com.jg.diary.navigation.PASSWORD_ROUTE
 import com.jg.diary.navigation.WRITING_ROUTE
 import com.jg.diary.navigation.diaryScreen
+import com.jg.diary.navigation.navigateToWriting
 import com.jg.diary.navigation.passwordScreen
 import com.jg.diary.navigation.writeScreen
 
@@ -86,9 +87,8 @@ fun AppNavHost(
 
         diaryScreen(
             onNavigateToWriting = { args ->
-                navController.navigate("$WRITING_ROUTE?args=$args") {
-                    launchSingleTop = true
-                }
+                println("!! diaryScreen args=$args")
+                navController.navigateToWriting(args)
             },
             onNavigationBack = {
                 navController.popBackStack()
