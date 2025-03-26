@@ -11,6 +11,12 @@ android {
     // build-logic에서 기본값 설정한 항목들은 제거
     // 아래 항목들은 특정 모듈만의 설정이 필요할 때만 사용
 
+    compileSdk = 34
+    
+    defaultConfig {
+        minSdk = 24
+    }
+
     // Kotlin 2.0에서 필요한 설정
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.10"
@@ -24,11 +30,17 @@ android {
 
     kotlinOptions {
         jvmTarget = "17"
+        freeCompilerArgs += listOf(
+            "-Xskip-metadata-version-check"
+        )
     }
 }
 
 dependencies {
     implementation(projects.common.ui)
+    implementation(projects.core.domain)
+    implementation(projects.core.data)
+    implementation(projects.core.model)
 
     // Hilt
     implementation(libs.hilt.android)

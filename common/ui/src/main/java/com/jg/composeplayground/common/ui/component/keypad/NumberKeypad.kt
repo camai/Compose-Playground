@@ -15,7 +15,7 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.jg.composeplayground.common.R
+import com.jg.composeplayground.common.ui.R
 
 @Composable
 fun NumberKeypad(

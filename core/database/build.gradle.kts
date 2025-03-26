@@ -8,6 +8,12 @@ plugins {
 
 android {
     namespace = "com.jg.composeplayground.database"
+    compileSdk = 34
+    
+    defaultConfig {
+        minSdk = 24
+    }
+    
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.10"
     }
@@ -20,6 +26,9 @@ android {
 
     kotlinOptions {
         jvmTarget = "17"
+        freeCompilerArgs += listOf(
+            "-Xskip-metadata-version-check"
+        )
     }
 }
 

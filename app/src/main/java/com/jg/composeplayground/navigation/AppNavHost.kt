@@ -10,13 +10,13 @@ import com.jg.composeplayground.bmi.navigation.bmiScreen
 import com.jg.composeplayground.home.HomeScreen
 import com.jg.composeplayground.lotto.navigation.LOTTO_ROUTE
 import com.jg.composeplayground.lotto.navigation.lottoScreen
-import com.jg.diary.navigation.DIARY_ROUTE
-import com.jg.diary.navigation.PASSWORD_ROUTE
-import com.jg.diary.navigation.WRITING_ROUTE
-import com.jg.diary.navigation.diaryScreen
-import com.jg.diary.navigation.navigateToWriting
-import com.jg.diary.navigation.passwordScreen
-import com.jg.diary.navigation.writeScreen
+import com.jg.composeplayground.diary.navigation.DIARY_ROUTE
+import com.jg.composeplayground.diary.navigation.PASSWORD_ROUTE
+import com.jg.composeplayground.diary.navigation.WRITING_ROUTE
+import com.jg.composeplayground.diary.navigation.diaryScreen
+import com.jg.composeplayground.diary.navigation.navigateToWriting
+import com.jg.composeplayground.diary.navigation.passwordScreen
+import com.jg.composeplayground.diary.navigation.writeScreen
 
 object AppDestinations {
     const val HOME_ROUTE = "home"

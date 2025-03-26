@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
 }
 android {
-    namespace = "com.jg.composeplayground.common"
+    namespace = "com.jg.composeplayground.common.ui"
 
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.10"

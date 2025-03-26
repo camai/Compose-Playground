@@ -24,7 +24,7 @@ android {
 
 dependencies {
     // 모델 모듈은 다른 모듈에 의존하지 않아야 함
-    // implementation(projects.core.data) 제거
+    implementation(projects.common.common)
 
     implementation(libs.kotlinx.serialization.json)
 
