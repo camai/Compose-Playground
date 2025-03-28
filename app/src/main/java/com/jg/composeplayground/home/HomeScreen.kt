@@ -21,6 +21,7 @@ fun HomeScreen(
     onBmiButtonClick: () -> Unit,
     onLottoButtonClick: () -> Unit,
     onDiaryButtonClick: () -> Unit,
+    onCalculatorButtonClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -28,7 +29,7 @@ fun HomeScreen(
             .fillMaxSize()
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(
             text = "Compose Playground",
@@ -36,15 +37,13 @@ fun HomeScreen(
             fontWeight = FontWeight.Bold
         )
         
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(8.dp))
         
         Text(
             text = "기능 선택",
             style = MaterialTheme.typography.titleMedium
         )
-        
-        Spacer(modifier = Modifier.height(16.dp))
-        
+
         Button(
             onClick = onBmiButtonClick,
             modifier = Modifier
@@ -54,7 +53,6 @@ fun HomeScreen(
             Text("BMI 계산하기")
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
 
         Button(
             onClick = onLottoButtonClick,
@@ -65,8 +63,6 @@ fun HomeScreen(
             Text("로또 번호 생성기")
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
-
         Button(
             onClick = onDiaryButtonClick,
             modifier = Modifier
@@ -74,6 +70,15 @@ fun HomeScreen(
                 .height(56.dp)
         ) {
             Text("비밀 다이어리")
+        }
+
+        Button(
+            onClick = onCalculatorButtonClick,
+            modifier = Modifier
+                .fillMaxWidth(0.8f)
+                .height(56.dp)
+        ) {
+            Text("계산기")
         }
     }
 } 

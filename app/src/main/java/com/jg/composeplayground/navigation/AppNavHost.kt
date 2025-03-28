@@ -7,12 +7,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.jg.composeplayground.bmi.navigation.BMI_ROUTE
 import com.jg.composeplayground.bmi.navigation.bmiScreen
+import com.jg.composeplayground.calculator.navigation.CALCULATOR_ROUTE
+import com.jg.composeplayground.calculator.navigation.calculatorScreen
 import com.jg.composeplayground.home.HomeScreen
 import com.jg.composeplayground.lotto.navigation.LOTTO_ROUTE
 import com.jg.composeplayground.lotto.navigation.lottoScreen
 import com.jg.composeplayground.diary.navigation.DIARY_ROUTE
 import com.jg.composeplayground.diary.navigation.PASSWORD_ROUTE
-import com.jg.composeplayground.diary.navigation.WRITING_ROUTE
 import com.jg.composeplayground.diary.navigation.diaryScreen
 import com.jg.composeplayground.diary.navigation.navigateToWriting
 import com.jg.composeplayground.diary.navigation.passwordScreen
@@ -57,6 +58,12 @@ fun AppNavHost(
                         launchSingleTop = true
                         restoreState = true
                     }
+                },
+                onCalculatorButtonClick = {
+                    navController.navigate(CALCULATOR_ROUTE) {
+                        launchSingleTop = true
+                        restoreState = true
+                    }
                 }
             )
         }
@@ -97,6 +104,12 @@ fun AppNavHost(
 
         writeScreen(
             onNavigationBack = {
+                navController.popBackStack()
+            }
+        )
+
+        calculatorScreen(
+            onBackPress = {
                 navController.popBackStack()
             }
         )
