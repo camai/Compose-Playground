@@ -51,7 +51,7 @@ import com.jg.composeplayground.model.navigation.DiaryWritingArgs
 import com.jg.composeplayground.diary.viewmodel.DiaryViewModel
 
 @Composable
-fun DiaryRoute(
+internal fun DiaryRoute(
     viewModel: DiaryViewModel = hiltViewModel(),
     onBackPress: () -> Unit,
     onNavigateToWriting: (DiaryWritingArgs) -> Unit
@@ -69,7 +69,7 @@ fun DiaryRoute(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DiaryScreen(
+private fun DiaryScreen(
     diaries: List<Diary>,
     formatDate: (java.time.LocalDateTime?) -> String,
     onDeleteDiary: (Int) -> Unit,
