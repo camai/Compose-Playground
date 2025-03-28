@@ -61,6 +61,7 @@ dependencies {
     implementation(projects.feature.lotto)
     implementation(projects.feature.diary)
     implementation(projects.feature.diary)
+    implementation(projects.feature.calculator)
 
     implementation(projects.core.data)
     implementation(projects.core.domain)

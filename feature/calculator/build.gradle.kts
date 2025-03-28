@@ -7,12 +7,9 @@ plugins {
 }
 
 android {
-    namespace = "com.jg.composeplayground.feature.diary"
-    // build-logic에서 기본값 설정한 항목들은 제거
-    // 아래 항목들은 특정 모듈만의 설정이 필요할 때만 사용
-
+    namespace = "com.jg.composeplayground.calculator"
     compileSdk = 35
-    
+
     defaultConfig {
         minSdk = 24
     }
@@ -37,6 +34,9 @@ android {
 }
 
 dependencies {
+    implementation(projects.common.ui)
+    implementation(projects.core.model)
+
     // Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)

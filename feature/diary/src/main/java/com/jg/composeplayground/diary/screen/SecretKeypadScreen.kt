@@ -35,9 +35,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jg.composeplayground.common.ui.component.keypad.NumberKeypad
-import com.jg.diary.R
+
 import com.jg.composeplayground.diary.viewmodel.PasswordState
 import com.jg.composeplayground.diary.viewmodel.SecretKeypadViewModel
+import com.jg.composeplayground.feature.diary.R
 
 @Composable
 fun SecretKeypadRoute(
