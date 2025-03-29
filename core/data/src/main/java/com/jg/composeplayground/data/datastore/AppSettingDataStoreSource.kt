@@ -3,7 +3,7 @@
 
 package com.jg.composeplayground.data.datastore
 
-import com.jg.composeplayground.model.data.AppSettingData
+import com.jg.composeplayground.model.data.AppSetting
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -14,7 +14,7 @@ interface AppSettingDataStoreSource {
     /**
      * 앱 설정 정보를 Flow로 제공
      */
-    val settings: Flow<AppSettingData>
+    val settings: Flow<AppSetting>
     
     /**
      * 패스코드 설정

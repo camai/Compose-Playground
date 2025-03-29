@@ -1,7 +1,7 @@
 package com.jg.composeplayground.data.mapper
 
 import com.jg.composeplayground.data.model.AppSettingDasto
-import com.jg.composeplayground.domain.model.AppSetting
+import com.jg.composeplayground.model.data.AppSetting
 
 object AppSettingMapper {
 

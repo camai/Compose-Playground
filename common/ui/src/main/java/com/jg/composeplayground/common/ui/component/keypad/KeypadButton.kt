@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun RippleCharButton(
     modifier: Modifier = Modifier,
+    textColor: Color = Color.Black,
     bgColor: Color,
     rippleColor: Color,
     onPressed: () -> Unit,
@@ -52,6 +53,7 @@ fun RippleCharButton(
             Text(
                 text = value.toString(),
                 style = textStyle,
+                color = textColor,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .align(Alignment.Center)
@@ -63,6 +65,7 @@ fun RippleCharButton(
 @Composable
 fun RippleTextButton(
     modifier: Modifier = Modifier,
+    textColor: Color = Color.Black,
     bgColor: Color,
     rippleColor: Color,
     onPressed: () -> Unit,
@@ -89,6 +92,7 @@ fun RippleTextButton(
             Text(
                 text = value,
                 style = textStyle,
+                color = textColor,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .align(Alignment.Center)

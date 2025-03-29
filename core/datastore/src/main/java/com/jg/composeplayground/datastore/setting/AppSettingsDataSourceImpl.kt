@@ -7,7 +7,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import com.jg.composeplayground.data.datastore.AppSettingDataStoreSource
 import com.jg.composeplayground.datastore.di.AppSettingDataStore
 import com.jg.composeplayground.datastore.utils.asDataStoreFlow
-import com.jg.composeplayground.model.data.AppSettingData
+import com.jg.composeplayground.model.data.AppSetting
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -24,12 +24,12 @@ class AppSettingsDataSourceImpl @Inject constructor(
         val PASS_CODE = stringPreferencesKey("pass_code")
     }
 
-    override val settings: Flow<AppSettingData> = dataStore.data
+    override val settings: Flow<AppSetting> = dataStore.data
         .map { preferences ->
-            AppSettingData(
+            AppSetting(
                 passCode = preferences[PreferencesKeys.PASS_CODE] ?: ""
             )
-        }.asDataStoreFlow("app-settings", AppSettingData())
+        }.asDataStoreFlow("app-settings", AppSetting())
 
     override suspend fun setPassCode(passCode: String) {
         dataStore.edit { preferences ->

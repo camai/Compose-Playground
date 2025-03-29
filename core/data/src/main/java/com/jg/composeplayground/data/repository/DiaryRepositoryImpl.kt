@@ -1,7 +1,7 @@
 package com.jg.composeplayground.data.repository
 
 import com.jg.composeplayground.data.database.DiaryLocalDataSource
-import com.jg.composeplayground.domain.model.Diary
+import com.jg.composeplayground.model.data.Diary
 import com.jg.composeplayground.domain.repository.DiaryRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

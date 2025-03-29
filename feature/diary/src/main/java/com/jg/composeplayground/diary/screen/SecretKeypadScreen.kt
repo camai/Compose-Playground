@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -35,12 +34,12 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jg.composeplayground.common.ui.component.keypad.NumberKeypad
-import com.jg.diary.R
 import com.jg.composeplayground.diary.viewmodel.PasswordState
 import com.jg.composeplayground.diary.viewmodel.SecretKeypadViewModel
+import com.jg.composeplayground.feature.diary.R
 
 @Composable
-fun SecretKeypadRoute(
+internal fun SecretKeypadRoute(
     viewModel: SecretKeypadViewModel = hiltViewModel(),
     onSuccess: () -> Unit,
     onBackPress: () -> Unit
@@ -68,7 +67,7 @@ fun SecretKeypadRoute(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SecretKeypadScreen(
+private fun SecretKeypadScreen(
     length: Int,
     passwordState: PasswordState,
     errorMessage: String?,
@@ -82,7 +81,7 @@ fun SecretKeypadScreen(
             .fillMaxSize(),
         topBar = {
             TopAppBar(
-                title = {  },
+                title = { },
                 navigationIcon = {
                     IconButton(onClick = onBackPress) {
                         Icon(
@@ -116,7 +115,7 @@ fun SecretKeypadScreen(
                     style = MaterialTheme.typography.headlineMedium
                 )
 
-                Box{
+                Box {
                     SecretImageBoxes(
                         modifier = Modifier
                             .fillMaxWidth(),
@@ -124,7 +123,7 @@ fun SecretKeypadScreen(
                         passwordState = passwordState
                     )
                 }
-                
+
                 if (errorMessage != null) {
                     Text(
                         text = errorMessage,
@@ -159,7 +158,7 @@ private fun SecretImageBoxes(
     inputLength: Int,
     passwordState: PasswordState
 ) {
-    Row (
+    Row(
         modifier = modifier
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
@@ -183,6 +182,7 @@ private fun SecretImageBoxes(
                     }
                 }
             }
+
             PasswordState.Warning -> {
                 repeat(MAX_LENGTH) { index ->
                     if (index < inputLength) {

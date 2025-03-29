@@ -1,6 +1,6 @@
 package com.jg.composeplayground.data.database
 
-import com.jg.composeplayground.domain.model.Diary
+import com.jg.composeplayground.model.data.Diary
 import kotlinx.coroutines.flow.Flow
 
 /**

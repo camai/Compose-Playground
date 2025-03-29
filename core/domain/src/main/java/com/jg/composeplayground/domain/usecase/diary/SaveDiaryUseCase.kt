@@ -1,7 +1,7 @@
 package com.jg.composeplayground.domain.usecase.diary
 
 import android.os.Build
-import com.jg.composeplayground.domain.model.Diary
+import com.jg.composeplayground.model.data.Diary
 import com.jg.composeplayground.domain.repository.DiaryRepository
 import java.time.LocalDateTime
 import javax.inject.Inject

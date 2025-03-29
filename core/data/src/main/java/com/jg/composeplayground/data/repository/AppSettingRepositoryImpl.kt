@@ -1,8 +1,8 @@
 package com.jg.composeplayground.data.repository
 
 import com.jg.composeplayground.data.datastore.AppSettingDataStoreSource
-import com.jg.composeplayground.domain.model.AppSetting
 import com.jg.composeplayground.domain.repository.AppSettingRepository
+import com.jg.composeplayground.model.data.AppSetting
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

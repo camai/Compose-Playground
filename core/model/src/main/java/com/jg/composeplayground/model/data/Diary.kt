@@ -1,4 +1,4 @@
-package com.jg.composeplayground.domain.model
+package com.jg.composeplayground.model.data
 
 import java.time.LocalDateTime
 
