@@ -4,7 +4,7 @@ import android.os.Build
 import com.jg.composeplayground.data.database.DiaryLocalDataSource
 import com.jg.composeplayground.database.dao.DiaryDao
 import com.jg.composeplayground.database.entity.DiaryEntity
-import com.jg.composeplayground.domain.model.Diary
+import com.jg.composeplayground.model.data.Diary
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.time.LocalDateTime

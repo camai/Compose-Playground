@@ -3,7 +3,7 @@ package com.jg.composeplayground.diary.viewmodel
 import android.os.Build
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jg.composeplayground.domain.model.Diary
+import com.jg.composeplayground.model.data.Diary
 import com.jg.composeplayground.domain.usecase.diary.DeleteDiaryUseCase
 import com.jg.composeplayground.domain.usecase.diary.GetAllDiariesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -45,7 +45,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.jg.composeplayground.domain.model.Diary
+import com.jg.composeplayground.model.data.Diary
 import com.jg.composeplayground.model.enums.DiaryWritingType
 import com.jg.composeplayground.model.navigation.DiaryWritingArgs
 import com.jg.composeplayground.diary.viewmodel.DiaryViewModel
