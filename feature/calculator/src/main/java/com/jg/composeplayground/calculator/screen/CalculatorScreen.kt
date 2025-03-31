@@ -109,26 +109,30 @@ private fun CalculatorScreen (
                     resultValue = resultValue
                 )
 
-                if (isHistoryVisible) {
-                    HistoryScreen(
-                        modifier = Modifier
-                            .padding(top = 20.dp)
-                            .fillMaxWidth()
-                            .wrapContentHeight(),
-                        onClearClick = onHistoryDismiss,
-                        histories = histories
-                    )
-                } else {
-                    // 키패드 영역(하단에 위치)
-                    CalculatorKeypadScreen(
-                        modifier = Modifier
-                            .padding(top = 20.dp)
-                            .fillMaxWidth()
-                            .wrapContentHeight(),
-                        onNumberClick = onNumberClick,
-                        onDoneClick = onDoneClick,
-                        onHistoryClick = onHistoryClick
-                    )
+                // 키패드 또는 히스토리 영역(하단에 위치)
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
+                ) {
+                    if (isHistoryVisible) {
+                        HistoryScreen(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(top = 20.dp),
+                            onClearClick = onHistoryDismiss,
+                            histories = histories
+                        )
+                    } else {
+                        CalculatorKeypadScreen(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(top = 20.dp),
+                            onNumberClick = onNumberClick,
+                            onDoneClick = onDoneClick,
+                            onHistoryClick = onHistoryClick
+                        )
+                    }
                 }
             }
         }
@@ -208,7 +212,7 @@ private fun CalculatorPreviewScreen() {
     CalculatorScreen(
         inputValue = "23",
         resultValue = "23",
-        isHistoryVisible = true,
+        isHistoryVisible = false,
         histories = emptyList(),
         onNumberClick = {},
         onDoneClick = {},
