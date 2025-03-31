@@ -75,21 +75,10 @@ internal fun CalculatorKeypadScreen(
                         }
                         else -> {
                             val value = key.value
-                            
-                            val bgColor = when (key) {
-                                CalKey.CLEAR -> Color(0xFFEEEEEE)
-                                CalKey.PARENTHESIS -> Color(0xFFEEEEEE)
-                                CalKey.PERCENT -> Color(0xFFEEEEEE)
-                                CalKey.DIVIDE -> Color(0xFFEEEEEE)
-                                CalKey.MULTIPLY -> Color(0xFFEEEEEE)
-                                CalKey.MINUS -> Color(0xFFEEEEEE)
-                                CalKey.PLUS -> Color(0xFFEEEEEE)
-                                else -> Color(0xFFEEEEEE) // 숫자와 소수점은 기본 배경색
-                            }
 
                             RippleCharButton(
                                 modifier = Modifier.aspectRatio(1.8f),  // 버튼 비율 조정
-                                bgColor = bgColor,
+                                bgColor = Color(0xFFEEEEEE),
                                 rippleColor = Color(0xFFDDDDDD),
                                 textColor = key.color,
                                 onPressed = {
