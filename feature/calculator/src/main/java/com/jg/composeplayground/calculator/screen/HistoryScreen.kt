@@ -38,6 +38,7 @@ internal fun HistoryScreen(
         Button(
             modifier = Modifier
                 .fillMaxWidth()
+                .background(color = Color.Green)
                 .padding(vertical = 16.dp, horizontal = 20.dp),
             onClick = onClearClick,
         ) {
