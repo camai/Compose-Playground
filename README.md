@@ -9,19 +9,29 @@ Compose-Playground/
 ├── app/                    # 메인 앱 모듈
 ├── build-logic/           # Gradle 빌드 로직
 │   └── convention/        # Gradle 컨벤션 플러그인
+├── core/                 # 코어 모듈
+│   ├── database/         # 로컬 데이터베이스
+│   ├── data/             # 데이터 레이어
+│   ├── domain/           # 도메인 레이어
+│   ├── model/            # 도메인 모델
+│   └── common/           # 공통 유틸리티
 └── feature/              # 기능 모듈
     ├── bmi/              # BMI 계산기 모듈
-    └── lotto/            # 로또 번호 생성기 모듈
-    └── diary/            # 시크릿 다이어리
+    ├── lotto/            # 로또 번호 생성기 모듈
+    ├── diary/            # 시크릿 다이어리
+    └── calculator/       # 계산기 모듈
 ```
 
 ## 기술 스택
 
 - **언어**: Kotlin
 - **UI 프레임워크**: Jetpack Compose
-- **아키텍처**: MVI (Model-View-Intent)
+- **아키텍처**: 클린 아키텍처 (Clean Architecture)
 - **빌드 시스템**: Gradle (Kotlin DSL)
 - **의존성 관리**: Version Catalog
+- **로컬 저장소**: Room Database
+- **비동기 처리**: Kotlin Coroutines & Flow
+- **의존성 주입**: Hilt
 
 ## 주요 기능
 
@@ -44,6 +54,12 @@ Compose-Playground/
 - 일기 수정
 - 일기 삭제
 - 비밀번호 입력 및 저장
+
+### 계산기
+- 기본 연산 기능 (덧셈, 뺄셈, 곱셈, 나눗셈)
+- 계산 결과 실시간 표시
+- 계산 기록 저장 및 조회
+- 저장된 계산 기록 삭제
 
 ## 개발 환경 설정
 
@@ -75,9 +91,16 @@ git clone [repository-url]
 - 네비게이션 관리
 - 공통 UI 컴포넌트
 
+### core 모듈
+- **database**: Room 데이터베이스 구현
+- **data**: 리포지토리 및 데이터 소스 구현
+- **domain**: 유스케이스 및 비즈니스 로직
+- **model**: 공통 도메인 모델
+- **common**: 공통 유틸리티 및 확장 함수
+
 ### feature 모듈
 - 각 기능별 독립적인 모듈
-- MVI 패턴 기반 구현
+- 클린 아키텍처 기반 구현
 - 재사용 가능한 UI 컴포넌트
 
 ### build-logic 모듈
