@@ -1,6 +1,6 @@
 package com.jg.composeplayground.domain.usecase.diary
 
-import com.jg.composeplayground.domain.model.Diary
+import com.jg.composeplayground.model.data.Diary
 import com.jg.composeplayground.domain.repository.DiaryRepository
 import javax.inject.Inject
 

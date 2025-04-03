@@ -1,5 +1,5 @@
 package com.jg.composeplayground.model.data
 
-data class AppSettingData(
+data class AppSetting(
     val passCode: String = ""
 )

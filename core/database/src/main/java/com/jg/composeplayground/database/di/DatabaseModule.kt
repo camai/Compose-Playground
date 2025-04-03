@@ -1,9 +1,12 @@
 package com.jg.composeplayground.database.di
 
 import android.content.Context
+import com.jg.composeplayground.data.database.CalculatorHistoryLocalDataSource
 import com.jg.composeplayground.data.database.DiaryLocalDataSource
 import com.jg.composeplayground.database.AppDatabase
+import com.jg.composeplayground.database.dao.CalculatorHistoryDao
 import com.jg.composeplayground.database.dao.DiaryDao
+import com.jg.composeplayground.database.source.CalculatorHistoryLocalDataSourceImpl
 import com.jg.composeplayground.database.source.DiaryLocalDataSourceImpl
 import dagger.Module
 import dagger.Provides
@@ -30,7 +33,20 @@ object DatabaseModule {
 
     @Provides
     @Singleton
+    fun provideCalculatorHistoryDao(appDatabase: AppDatabase): CalculatorHistoryDao {
+        return appDatabase.calculatorHistoryDao()
+    }
+
+    @Provides
+    @Singleton
     fun provideDiaryLocalDataSource(diaryDao: DiaryDao): DiaryLocalDataSource {
         return DiaryLocalDataSourceImpl(diaryDao)
     }
+
+    @Provides
+    @Singleton
+    fun provideCalculatorHistoryLocalDataSource(calculatorHistoryDao: CalculatorHistoryDao): CalculatorHistoryLocalDataSource {
+        return CalculatorHistoryLocalDataSourceImpl(calculatorHistoryDao)
+    }
+
 } 

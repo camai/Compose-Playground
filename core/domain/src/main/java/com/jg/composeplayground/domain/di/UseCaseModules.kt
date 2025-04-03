@@ -1,5 +1,11 @@
 package com.jg.composeplayground.domain.di
 
+import com.jg.composeplayground.domain.usecase.calculator.DeleteAllHistoriesUseCase
+import com.jg.composeplayground.domain.usecase.calculator.DeleteAllHistoriesUseCaseImpl
+import com.jg.composeplayground.domain.usecase.calculator.GetAllHistoriesUseCase
+import com.jg.composeplayground.domain.usecase.calculator.GetAllHistoriesUseCaseImpl
+import com.jg.composeplayground.domain.usecase.calculator.SaveHistoryUseCase
+import com.jg.composeplayground.domain.usecase.calculator.SaveHistoryUseCaseImpl
 import com.jg.composeplayground.domain.usecase.diary.DeleteDiaryUseCase
 import com.jg.composeplayground.domain.usecase.diary.DeleteDiaryUseCaseImpl
 import com.jg.composeplayground.domain.usecase.diary.GetAllDiariesUseCase
@@ -59,4 +65,18 @@ abstract class UseCaseModules {
         getAllDiariesUseCase: GetAllDiariesUseCaseImpl
     ): GetAllDiariesUseCase
 
+    @Binds
+    abstract fun bindGetAllHistoriesUseCase(
+        getAllHistoriesUseCase: GetAllHistoriesUseCaseImpl
+    ): GetAllHistoriesUseCase
+
+    @Binds
+    abstract fun bindSaveHistoryUseCase(
+        saveHistoryUseCase: SaveHistoryUseCaseImpl
+    ): SaveHistoryUseCase
+
+    @Binds
+    abstract fun bindDeleteAllHistoriesUseCase(
+        deleteAllHistoriesUseCase: DeleteAllHistoriesUseCaseImpl
+    ): DeleteAllHistoriesUseCase
 }

@@ -2,13 +2,11 @@ package com.jg.composeplayground.diary.navigation
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.jg.composeplayground.common.common.navigation.*
-import com.jg.composeplayground.model.enums.DiaryWritingType
 import com.jg.composeplayground.model.navigation.DiaryWritingArgs
 import com.jg.composeplayground.diary.screen.DiaryRoute
 import com.jg.composeplayground.diary.screen.SecretKeypadRoute

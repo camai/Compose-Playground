@@ -26,6 +26,8 @@ include(":app")
 include(":feature:bmi")
 include(":feature:lotto")
 include(":feature:diary")
+include(":feature:calculator")
+
 include(":core:data")
 include(":core:datastore")
 include(":core:model")
