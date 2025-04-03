@@ -51,11 +51,10 @@ abstract class AppDatabase : RoomDatabase() {
 private val MIGRATION_1_2 = object : Migration(1, 2) {
     override fun migrate(database: SupportSQLiteDatabase) {
         database.execSQL(
-            "CREATE TABLE IF NOT EXISTS `calculator_history` " +
+            "CREATE TABLE IF NOT EXISTS `calculator_histories` " +
             "(`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
             "`expression` TEXT NOT NULL, " +
-            "`result` TEXT NOT NULL, " +
-            "`timestamp` INTEGER NOT NULL)"
+            "`result` TEXT NOT NULL)"
         )
     }
 } 

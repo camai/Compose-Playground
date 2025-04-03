@@ -46,16 +46,17 @@ internal fun CalculatorRoute (
     onBackPress: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val histories by viewModel.histories.collectAsStateWithLifecycle()
 
     CalculatorScreen(
         inputValue = uiState.expressionValue,
-        resultValue = "774425205",
-        isHistoryVisible = false,
-        histories = emptyList(),
+        resultValue = uiState.resultValue,
+        isHistoryVisible = uiState.isHistoryVisible,
+        histories = histories,
         onNumberClick = viewModel::inputValue,
-        onDoneClick = {},
-        onHistoryClick = {},
-        onHistoryDismiss = {},
+        onDoneClick = { viewModel.inputValue('=') },
+        onHistoryClick = viewModel::toggleHistoryVisibility,
+        onHistoryDismiss = viewModel::clearHistories,
         onBackPress = onBackPress
     )
 }
@@ -78,7 +79,7 @@ private fun CalculatorScreen (
             .fillMaxSize(),
         topBar = {
             TopAppBar(
-                title = { },
+                title = { Text(if (isHistoryVisible) "계산기 기록" else "계산기") },
                 navigationIcon = {
                     IconButton(onClick = onBackPress) {
                         Icon(
