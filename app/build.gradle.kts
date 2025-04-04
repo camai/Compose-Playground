@@ -62,6 +62,7 @@ dependencies {
     implementation(projects.feature.diary)
     implementation(projects.feature.diary)
     implementation(projects.feature.calculator)
+    implementation(projects.feature.photoframe)
 
     implementation(projects.core.data)
     implementation(projects.core.domain)

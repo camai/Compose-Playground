@@ -27,6 +27,7 @@ include(":feature:bmi")
 include(":feature:lotto")
 include(":feature:diary")
 include(":feature:calculator")
+include(":feature:photoframe")
 
 include(":core:data")
 include(":core:datastore")
