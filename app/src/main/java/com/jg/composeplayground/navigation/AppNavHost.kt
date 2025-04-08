@@ -18,6 +18,8 @@ import com.jg.composeplayground.diary.navigation.diaryScreen
 import com.jg.composeplayground.diary.navigation.navigateToWriting
 import com.jg.composeplayground.diary.navigation.passwordScreen
 import com.jg.composeplayground.diary.navigation.writeScreen
+import com.jg.composeplayground.photoframe.navigation.PHOTO_FRAME_ROUTE
+import com.jg.composeplayground.photoframe.navigation.photoFrameScreen
 
 object AppDestinations {
     const val HOME_ROUTE = "home"
@@ -64,6 +66,12 @@ fun AppNavHost(
                         launchSingleTop = true
                         restoreState = true
                     }
+                },
+                onPhotoFrameButtonClick = {
+                    navController.navigate(PHOTO_FRAME_ROUTE) {
+                        launchSingleTop = true
+                        restoreState = true
+                    }
                 }
             )
         }
@@ -94,7 +102,6 @@ fun AppNavHost(
 
         diaryScreen(
             onNavigateToWriting = { args ->
-                println("!! diaryScreen args=$args")
                 navController.navigateToWriting(args)
             },
             onNavigationBack = {
@@ -109,6 +116,12 @@ fun AppNavHost(
         )
 
         calculatorScreen(
+            onBackPress = {
+                navController.popBackStack()
+            }
+        )
+
+        photoFrameScreen(
             onBackPress = {
                 navController.popBackStack()
             }

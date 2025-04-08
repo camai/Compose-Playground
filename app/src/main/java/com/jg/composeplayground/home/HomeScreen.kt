@@ -22,6 +22,7 @@ fun HomeScreen(
     onLottoButtonClick: () -> Unit,
     onDiaryButtonClick: () -> Unit,
     onCalculatorButtonClick: () -> Unit,
+    onPhotoFrameButtonClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -79,6 +80,15 @@ fun HomeScreen(
                 .height(56.dp)
         ) {
             Text("계산기")
+        }
+
+        Button(
+            onClick = onPhotoFrameButtonClick,
+            modifier = Modifier
+                .fillMaxWidth(0.8f)
+                .height(56.dp)
+        ) {
+            Text("전자 액자")
         }
     }
 } 
