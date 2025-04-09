@@ -61,6 +61,12 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
+    // Coil - 이미지 로딩 라이브러리
+    implementation("io.coil-kt:coil-compose:2.5.0")
+    
+    // Accompanist - 권한 관리
+    implementation("com.google.accompanist:accompanist-permissions:0.32.0")
+
     // 테스트 의존성
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
