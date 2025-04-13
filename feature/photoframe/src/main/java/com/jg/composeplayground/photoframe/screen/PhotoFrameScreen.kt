@@ -13,12 +13,17 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -85,6 +90,11 @@ fun PhotoFrameScreen(
     // ViewModel에서 UI 상태 가져오기
     val uiState by viewModel.uiState.collectAsState()
     
+    // 테스트용 더미 이미지 URI 목록 (실제로는 ViewModel에서 관리할 데이터)
+    val dummyImageUris = remember {
+        List(9) { uiState.selectedPhotoUri }
+    }
+    
     // 갤러리에서 이미지 선택 결과 처리
     val galleryLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
@@ -143,41 +153,73 @@ fun PhotoFrameScreen(
                         .padding(horizontal = 20.dp)
                         .padding(top = 20.dp)
                 ) {
-                    // 선택된 이미지 표시
+                    // 3x3 LazyGrid로 이미지 표시
                     if (uiState.hasPhoto && uiState.selectedPhotoUri != null) {
-                        Image(
-                            painter = rememberAsyncImagePainter(uiState.selectedPhotoUri),
-                            contentDescription = "선택된 사진",
+                        LazyVerticalGrid(
+                            columns = GridCells.Fixed(3),
+                            contentPadding = PaddingValues(4.dp),
+                            horizontalArrangement = Arrangement.spacedBy(4.dp),
+                            verticalArrangement = Arrangement.spacedBy(4.dp),
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .weight(1f)
-                                .aspectRatio(1f)
-                                .clip(RoundedCornerShape(8.dp))
-                                .border(
-                                    width = 1.dp,
-                                    color = Color.LightGray,
-                                    shape = RoundedCornerShape(8.dp)
-                                ),
-                            contentScale = ContentScale.Crop
-                        )
-                    } else {
-                        // 빈 상태 표시
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .weight(1f)
-                                .aspectRatio(1f)
-                                .border(
-                                    width = 1.dp,
-                                    color = Color.LightGray,
-                                    shape = RoundedCornerShape(8.dp)
-                                ),
-                            contentAlignment = Alignment.Center
                         ) {
-                            Text(
-                                text = "사진을 추가해주세요",
-                                color = Color.Gray
-                            )
+                            items(dummyImageUris) { uri ->
+                                uri?.let {
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .aspectRatio(1f)
+                                    ) {
+                                        Image(
+                                            painter = rememberAsyncImagePainter(it),
+                                            contentDescription = "선택된 사진",
+                                            modifier = Modifier
+                                                .fillMaxSize()
+                                                .clip(RoundedCornerShape(4.dp))
+                                                .border(
+                                                    width = 1.dp,
+                                                    color = Color.LightGray,
+                                                    shape = RoundedCornerShape(4.dp)
+                                                ),
+                                            contentScale = ContentScale.Crop // 비율 유지하면서 크롭
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        // 빈 상태 표시 - 3x3 그리드 레이아웃
+                        LazyVerticalGrid(
+                            columns = GridCells.Fixed(3),
+                            contentPadding = PaddingValues(4.dp),
+                            horizontalArrangement = Arrangement.spacedBy(4.dp),
+                            verticalArrangement = Arrangement.spacedBy(4.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .weight(1f)
+                        ) {
+                            items(9) {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .aspectRatio(1f)
+                                        .border(
+                                            width = 1.dp,
+                                            color = Color.LightGray,
+                                            shape = RoundedCornerShape(4.dp)
+                                        ),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    if (it == 4) { // 중앙 셀에만 텍스트 표시
+                                        Text(
+                                            text = "사진을 추가해주세요",
+                                            color = Color.Gray,
+                                            style = MaterialTheme.typography.bodySmall
+                                        )
+                                    }
+                                }
+                            }
                         }
                     }
                     
