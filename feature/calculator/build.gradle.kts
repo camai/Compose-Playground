@@ -1,7 +1,5 @@
 plugins {
     alias(libs.plugins.android.feature)
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.compose.compiler)
 }
@@ -34,16 +32,6 @@ android {
 }
 
 dependencies {
-    implementation(projects.common.ui)
-    implementation(projects.core.model)
-
-    // Hilt
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
-
-    // Hilt와 ViewModel 통합을 위한 의존성
-    implementation(libs.hilt.navigation.compose)
-
     // Navigation
     implementation(libs.androidx.navigation.compose)
 

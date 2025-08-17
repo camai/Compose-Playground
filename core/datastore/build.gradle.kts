@@ -1,8 +1,6 @@
 plugins {
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.ksp)
+    alias(libs.plugins.android.core)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.android.library)
 }
 
 android {
@@ -27,17 +25,12 @@ dependencies {
     implementation(projects.core.data)
 
     implementation(libs.kotlinx.serialization.json)
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.kotlinx.coroutines.android)
     
     // DataStore
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.datastore.core)
-
-    // Hilt
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

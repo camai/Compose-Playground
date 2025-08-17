@@ -1,8 +1,6 @@
 plugins {
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.ksp)
+    alias(libs.plugins.android.core)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.android.library)
     alias(libs.plugins.android.room)
 }
 
@@ -33,22 +31,16 @@ android {
 }
 
 dependencies {
-
     // data 모듈에 의존해서 인터페이스 구현
     implementation(projects.core.data)
 
     implementation(libs.kotlinx.serialization.json)
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.kotlinx.coroutines.android)
 
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
-
-    // Hilt
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

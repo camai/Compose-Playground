@@ -6,6 +6,7 @@ class AndroidCoreConventionPlugin : Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply("jg.composeplayground.android.library")
+                apply("jg.composeplayground.android.hilt") // Hilt 자동 적용
 
                 // UI 플러그인 적용
                 apply("com.android.library")
